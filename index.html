@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nightfall — Valorant Companion</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="orb orb-one"></div><div class="orb orb-two"></div><div class="grain"></div>
+  <main class="shell">
+    <aside class="sidebar">
+      <a class="brand" href="#overview"><span class="brand-mark">N</span><span>NIGHTFALL<small>VALORANT COMPANION</small></span></a>
+      <div class="profile"><div class="avatar">N</div><div><b>Waiting&#8230;</b><span>for Riot Client</span></div><i title="Offline"></i></div>
+      <nav aria-label="Main navigation">
+        <button class="nav-link active" data-page="overview"><span>⌁</span> Overview</button>
+        <button class="nav-link" data-page="live"><span>●</span> Live match</button>
+        <button class="nav-link" data-page="matches"><span>◈</span> Match history</button>
+        <button class="nav-link" data-page="players"><span>◎</span> Player lookup</button>
+        <button class="nav-link" data-page="settings"><span>⚙</span> Settings</button>
+      </nav>
+      <div class="local-status"><i></i> WAITING FOR DATA SOURCE<br /><small>Connect Riot Client or an account source to go live.</small></div>
+    </aside>
+    <section class="main-content">
+      <header><span id="page-label">OVERVIEW</span><span class="client-status"><i></i> GAME CLIENT NOT DETECTED</span></header>
+      <section id="overview" class="page active">
+        <div class="profile-hero" id="profile-hero">
+          <div class="profile-hero-banner" id="profile-hero-banner"></div>
+          <div class="profile-hero-content">
+            <div class="profile-hero-identity">
+              <div class="profile-hero-pfp" id="profile-hero-pfp"><span>NF</span></div>
+              <div class="profile-hero-copy">
+                <p class="eyebrow">NIGHTFALL PROFILE</p>
+                <p class="profile-greeting" id="profile-greeting">Good evening</p>
+                <small class="profile-date" id="profile-date">—</small>
+                <h1 id="profile-riot-id">Waiting for Riot Client</h1>
+                <div class="profile-badges"><span class="pill" id="profile-region">Riot Client</span><span class="pill" id="profile-connection">LIVE POLL</span></div>
+              </div>
+            </div>
+            <div class="profile-hero-state" id="profile-hero-state">
+              <small>CLIENT STATE</small><b id="profile-state-label">Waiting</b><span id="profile-state-meta">Open VALORANT for live status</span>
+            </div>
+          </div>
+          <div class="profile-metrics">
+            <article class="profile-metric"><small>CURRENT RANK</small><div><span class="rank-gem" id="rank-gem">◇</span><b id="rank-current">—</b></div><span id="rank-rr">—</span></article>
+            <article class="profile-metric"><small>PEAK RANK</small><b id="rank-peak">—</b><span id="rank-peak-label">PEAK</span></article>
+            <article class="profile-metric"><small>LEVEL</small><b id="profile-level">—</b><span>Account level</span></article>
+            <article class="profile-metric"><small>ACT ENDS</small><b id="profile-act-ends">—</b><span>Current act</span></article>
+          </div>
+        </div>
+        <div class="stat-grid">
+          <article><small>WIN RATE</small><b id="stat-winrate">—</b><span>Waiting for data</span></article><article><small>AVG. K/D</small><b id="stat-kd">—</b><span class="positive">Waiting for data</span></article><article><small>HEADSHOT</small><b id="stat-hs">—</b><span>Waiting for data</span></article><article><small>ACT RANK</small><b id="stat-act">—</b><span>Waiting for data</span></article>
+        </div>
+        <article class="panel store-panel">
+          <div class="panel-head"><div><p class="eyebrow">DAILY SHOP</p><h2>Store</h2></div><span class="pill store-pill"><span class="store-pill-timer" id="store-timer"></span><span>🛍</span></span></div>
+          <div class="store-empty" id="store-empty"><b>◈</b><h2>Riot client required</h2><p>Connect a Valorant session to see today's featured bundle and weapon offers here.</p></div>
+          <div class="store-content" id="store-content" hidden></div>
+        </article>
+      </section>
+      <section id="live" class="page">
+        <div class="page-head"><p class="eyebrow">LIVE MATCH</p><h1>Live match</h1><p>Your live lobby, Agent Select, and in-game roster — pulled straight from your Riot Client.</p></div>
+        <article class="panel live-panel"><div id="live-board"></div>
+          <section class="match-controls" id="match-controls" hidden>
+            <div class="controls-banner">
+              <div class="panel-head"><div><p class="eyebrow">AGENT TOOL</p><h2>Match controls</h2></div><span class="pill warn-pill">⚠ WRITE TO GAME CLIENT</span></div>
+              <p class="controls-warning">These controls configure your Agent Select tool on the local VALORANT client. Instalock only starts when you switch it <b>ON</b> in the hero — it never runs automatically, and Dodge always asks you first.</p>
+            </div>
+            <div class="controls-body">
+              <div class="controls-config" id="controls-config">
+                <div class="controls-row">
+                  <label class="agent-compat hidden-field">Agent<select id="instalock-agent" hidden></select></label>
+                  <label>Mode<select id="instalock-mode"><option value="select">Select only</option><option value="lock" selected>Select + Lock</option></select></label>
+                  <label>Delay (s)<input id="instalock-delay" type="number" min="0" max="60" step="1" value="0" /></label>
+                </div>
+                <div class="controls-maps"><p class="eyebrow">PER-MAP AGENT PRESETS</p><div class="map-presets" id="map-presets"></div></div>
+                <p class="controls-status"><span id="controls-state" class="state-chip">—</span><span id="controls-message">Instalock is off.</span></p>
+              </div>
+            </div>
+          </section>
+        </article>
+        <div class="agent-picker-backdrop" id="agent-picker" role="dialog" aria-modal="true" aria-label="Agent picker" hidden>
+          <div class="agent-picker">
+            <div class="ap-head">
+              <div><p class="eyebrow">AGENT TOOL</p><h2>Agent Picker</h2></div>
+              <button type="button" class="ap-close" id="agent-picker-close" aria-label="Close agent picker">×</button>
+            </div>
+            <div class="ap-tabs" role="tablist" aria-label="Agent picker tabs">
+              <button type="button" class="ap-tab active" data-aptab="default">Default</button>
+              <button type="button" class="ap-tab" data-aptab="permap">Per-Map</button>
+            </div>
+            <div class="ap-tabpanels">
+              <div class="ap-tabpanel" data-pane="default">
+                <input id="ap-search" class="ap-search" type="text" placeholder="Search agents..." autocomplete="off" />
+                <div class="ap-roles" id="ap-roles">
+                  <button type="button" class="ap-role active" data-aprole="">ALL</button>
+                  <button type="button" class="ap-role" data-aprole="Duelist">DUELIST</button>
+                  <button type="button" class="ap-role" data-aprole="Initiator">INITIATOR</button>
+                  <button type="button" class="ap-role" data-aprole="Controller">CONTROLLER</button>
+                  <button type="button" class="ap-role" data-aprole="Sentinel">SENTINEL</button>
+                </div>
+                <div class="ap-grid" id="ap-grid-default"></div>
+              </div>
+              <div class="ap-tabpanel" data-pane="permap" hidden>
+                <div class="ap-mapgrid" id="ap-mapgrid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="matches" class="page"><div class="page-head"><p class="eyebrow">PERFORMANCE LOG</p><h1>Match history</h1><p>Filter your recent games and spot patterns in your performance.</p></div><div class="filters"><input id="match-query" placeholder="Search map, agent, or result" /><button class="filter selected">All modes</button><button class="filter">Competitive</button><button class="filter">Unrated</button></div><article class="panel" id="match-list"></article></section>
+      <section id="players" class="page"><div class="page-head"><p class="eyebrow">PLAYER LOOKUP</p><h1>Player lookup</h1><p>Public player lookup requires a supported Riot data provider that is not currently connected.</p></div><article class="panel player-lookup-coming" id="player-result"><div class="coming-icon" aria-hidden="true">◎</div><span class="coming-badge">COMING SOON</span><h2>Public player lookup is coming soon.</h2><p>A supported Riot data source will be required to search players by Riot ID.</p></article></section>
+      <section id="settings" class="page"><div class="page-head"><p class="eyebrow">PREFERENCES</p><h1>Settings</h1><p>Control the companion’s look and local data.</p></div><div class="settings-grid"><article class="panel setting"><div><h2>Reduced motion</h2><p>Limit interface movement and animated accents.</p></div><label class="toggle"><input id="motion-toggle" type="checkbox" /><i></i></label></article><article class="panel setting"><div><h2>High contrast</h2><p>Increase contrast across panels and text.</p></div><label class="toggle"><input id="contrast-toggle" type="checkbox" /><i></i></label></article><article class="panel setting"><div><h2>Instalock</h2><p>Show Instalock and Agent controls in Live Match.</p><p class="setting-warn"><b>⚠ Riot Penalty Warning</b><br />Riot may penalize players using these tools. Penalties can include temporary game bans and may escalate to permanent bans for repeated use.</p></div><label class="toggle"><input id="instalock-visibility-toggle" type="checkbox" /><i></i></label></article><article class="panel setting full"><div><h2>Data connection</h2><p>Sample data is currently shown. No automated game actions are included.</p></div><button disabled>Coming soon</button></article></div></section>
+    </section>
+  </main>
+  <script src="lib/live-ui.js"></script>
+  <script src="app.js"></script>
+  <script src="lib/profile-ui.js"></script>
+  <script>
+  // Overview dashboard - Daily Shop, fed by the local server
+  // (GET /api/store). The browser only renders sanitized JSON;
+  // Riot credentials/session secrets stay server-side. No data is fabricated:
+  // if the client is unavailable or the endpoint fails, a clean waiting/error
+  // state is shown instead of fake store items.
+  (function () {
+    function esc(v) { return String(v ?? '').replace(/[&<>"']/g, function(c){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[c]; }); }
+    function escAttr(v) { return esc(v); }
+
+    var storeEmpty = document.getElementById('store-empty');
+    var storeContent = document.getElementById('store-content');
+    var storeTimer = document.getElementById('store-timer');
+
+    function fmtDur(raw) {
+      if (raw == null) return null;
+      var s = Number(raw); if (!isFinite(s) || s <= 0) return null;
+      var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60);
+      if (h) return h + 'h' + (m ? ' ' + m + 'm' : '');
+      if (m) return m + 'm';
+      return s + 's';
+    }
+
+
+    function priceHTML(p) {
+      if (p == null) return '<b>\u2014</b>';
+      if (typeof p === 'object') {
+        var base = Number(p.base); var disc = p.discounted != null ? Number(p.discounted) : null;
+        if (disc != null && isFinite(disc) && (base == null || disc < base))
+          return '<span class="store-price"><b class="sale">' + disc + ' VP</b>' + (base != null ? ' <s>' + base + ' VP</s>' : '') + '</span>';
+        if (base != null && isFinite(base) && base > 0) return '<span class="store-price"><b>' + base + ' VP</b></span>';
+        return '<b>\u2014</b>';
+      }
+      if (Number(p) > 0) return '<span class="store-price"><b>' + Number(p) + ' VP</b></span>';
+      return '<b>\u2014</b>';
+    }
+
+    function offerCard(o) {
+      var img = o.image ? '<img class="offer-img" src="' + escAttr(o.image) + '" loading="lazy" alt="">' : '<span class="offer-img placeholder"></span>';
+      var timer = (o.remainingSeconds != null) ? '<span class="store-timer">' + esc(fmtDur(o.remainingSeconds)) + '</span>' : '';
+      return '<div class="offer-card">' + img + '<div class="offer-meta"><b>' + esc(o.skin || 'Unknown') + '</b>'
+        + (o.weapon ? '<small>' + esc(o.weapon) + '</small>' : '<small>&nbsp;</small>')
+        + priceHTML(o.price) + timer + '</div></div>';
+    }
+
+    function storeUnavailable(msg) {
+      if (storeEmpty) { storeEmpty.hidden = false; var h = storeEmpty.querySelector('h2'); if (h) h.textContent = msg || 'Store unavailable'; }
+      if (storeContent) storeContent.hidden = true;
+      if (storeTimer) storeTimer.textContent = '';
+    }
+
+    function renderStore(d) {
+      if (!d || d.source === 'none' || d.error) { storeUnavailable((d && d.message) || 'Riot client unavailable'); return; }
+      var featuredHtml = ''; var f = d.featured;
+      if (f && (f.name || f.image)) {
+        var img = f.image ? '<img class="store-featured-img" src="' + escAttr(f.image) + '" alt="" loading="lazy">' : '<span class="store-featured-img placeholder"></span>';
+        var ftime = (f.remainingSeconds != null) ? '<span class="store-timer">Resets in ' + esc(fmtDur(f.remainingSeconds)) + '</span>' : '';
+        featuredHtml = '<div class="store-featured">' + img + '<div class="store-featured-body"><p class="eyebrow">Featured bundle</p>'
+          + '<h3>' + esc(f.name || 'Featured bundle') + '</h3>'
+          + '<div class="store-price-row">' + priceHTML(f.price) + ftime + '</div></div></div>';
+      }
+      var offersHtml = '';
+      if (Array.isArray(d.offers) && d.offers.length) {
+        offersHtml = '<p class="eyebrow store-section-title">Your offers</p><div class="store-offers">' + d.offers.map(offerCard).join('') + '</div>';
+      } else {
+        offersHtml = '<p class="eyebrow store-section-title">Your offers</p><div class="friend-empty small"><b>\u25C8</b><h2>No offers available</h2><p>No daily offers are currently on sale.</p></div>';
+      }
+      if (storeTimer) storeTimer.textContent = d.remainingSeconds ? esc(fmtDur(d.remainingSeconds)) : '';
+      if (storeContent) { storeContent.innerHTML = featuredHtml + offersHtml; storeContent.hidden = false; }
+      if (storeEmpty) storeEmpty.hidden = true;
+    }
+
+    async function fetchStore() {
+      try { var r = await fetch('/api/store'); renderStore(await r.json()); }
+      catch (e) { storeUnavailable('Could not reach the local server'); }
+    }
+
+    fetchStore();
+    setInterval(fetchStore, 3 * 60 * 1000); // refresh storefront while the page is open
+
+    window.NightfallStore = { renderStore: renderStore, fetchStore: fetchStore };
+  })();
+  </script>
+</body>
+</html>

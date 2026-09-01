@@ -1,0 +1,20 @@
+Nightfall VALORANT Companion
+Copyright (C) 2026 Nightfall contributors
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version. See LICENSE.
+
+Portions of the live client, session-state, roster, name, rank, and
+stat pipeline in lib/ are adapted from Valorant Scout
+(https://github.com/kryotrades/valorant-scout)
+Copyright (C) 2026 kryotrades
+Licensed under the GNU General Public License v3.0.
+
+Session-state and pregame roster behavior was also informed by
+Fast Pick (https://github.com/Imu-D-sama/Fast-Pick), licensed under
+the GNU General Public License v3.0. Nightfall does not include
+Fast Pick's instalock, dodge, queue, or GUI code.
+
+Nightfall is not affiliated with, endorsed by, or sponsored by Riot Games.
