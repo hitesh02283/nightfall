@@ -543,6 +543,10 @@ function applyLiveProfile(board) {
   const profileLevel = document.getElementById('profile-level');
   const profileActEnds = document.getElementById('profile-act-ends');
   if (!active) {
+    // A connected Riot Client can briefly return an incomplete lobby board
+    // while its profile data is still loading. Keep any valid profile assets
+    // already shown instead of treating that transient response as offline.
+    if (board && board.running && liveProfileState.active) return;
     // Live client dropped/disconnected. If we had applied real live values,
     // fall back cleanly to the last captured profile-summary/demo values.
     if (liveProfileState.active && window.NightfallOverviewFallback) {
@@ -628,7 +632,10 @@ function applyLiveProfile(board) {
     }
   }
 }
+let livePollInFlight = false;
 async function pollLive() {
+  if (livePollInFlight) return;
+  livePollInFlight = true;
   let board = null;
   try {
     const res = await fetch('/api/live');
@@ -642,6 +649,7 @@ async function pollLive() {
   if (liveBoardRoot) bindQueueControls(liveBoardRoot);
   renderStateHeader(board || liveOffline());
   applyLiveProfile(board || null);
+  livePollInFlight = false;
 }
 function bindQueueControls(root) {
   const find = root.querySelector('[data-find-match]');
